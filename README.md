@@ -1,57 +1,132 @@
-# Kira ✦ — URL Shortener
+# 🔗 Kira – URL Shortener
 
-A cute anime-styled URL shortener with **user authentication**, **click analytics**, and **per-user dashboards**.
+A secure and modern URL Shortener web application built with **Flask**, **SQLite**, **HTML**, **CSS**, and **Vanilla JavaScript**. The application allows users to create short URLs, securely manage them through a personal dashboard, and track click statistics in real time.
 
-## Features
-- Register / Login / Logout (bcrypt password hashing)
-- Shorten any URL to a 6-char code
-- Per-user link isolation — you only see your own links
-- Click tracking per link
-- Delete links
-- Stats lookup
-- JSON API
+🌐 **Live Demo:** https://kira-a-url-shortener.onrender.com
 
-## Tech Stack
-| Layer    | Tech              |
-|----------|-------------------|
-| Backend  | Python + Flask    |
-| Auth     | bcrypt + sessions |
-| Database | SQLite            |
-| Frontend | HTML + Vanilla JS |
+💻 **GitHub Repository:** https://github.com/Tam-builds/Kira---A-URL-Shortener
 
-## Run Locally
+---
+
+## ✨ Features
+
+* 🔐 Secure user registration and login
+* 🔑 Password hashing using bcrypt
+* 🔗 Generate unique 6-character short URLs
+* 🚀 Redirect short URLs to their original destination
+* 📊 Track click statistics for every URL
+* 📂 Personal dashboard for managing links
+* 🗑️ Delete previously created URLs
+* 📱 Clean and responsive user interface
+
+---
+
+## 🛠️ Tech Stack
+
+| Category        | Technology                      |
+| --------------- | ------------------------------- |
+| Backend         | Python, Flask                   |
+| Database        | SQLite                          |
+| Authentication  | bcrypt, Flask Sessions          |
+| Frontend        | HTML5, CSS3, Vanilla JavaScript |
+| Deployment      | Render                          |
+| Version Control | Git & GitHub                    |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-cd url-shortener-v2
+git clone https://github.com/Tam-builds/Kira---A-URL-Shortener.git
+cd Kira---A-URL-Shortener
+```
+
+### 2. Create a virtual environment
+
+**Windows**
+
+```bash
 python -m venv venv
-source venv/bin/activate       # Windows: venv\Scripts\activate
+venv\Scripts\activate
+```
+
+**Linux / macOS**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### 4. Run the application
+
+```bash
 python app.py
 ```
 
-Open `http://localhost:5000` — register an account and start shortening!
+Open your browser and visit:
 
-## Deploy to Render (Free)
+```text
+http://localhost:5000
+```
 
-1. Push to GitHub
-2. New Web Service on render.com
-3. Build command: `pip install -r requirements.txt`
-4. Start command: `gunicorn app:app`
-5. Add env var: `SECRET_KEY=your-random-secret-here`
+---
 
-## API Endpoints
+## 📸 Screenshots
 
-| Method | Endpoint        | Auth | Description              |
-|--------|-----------------|------|--------------------------|
-| GET    | `/`             | ✅   | Dashboard                |
-| POST   | `/shorten`      | ✅   | Shorten a URL (JSON)     |
-| GET    | `/<code>`       | ❌   | Redirect to original URL |
-| GET    | `/stats/<code>` | ✅   | Get stats for a code     |
-| POST   | `/delete/<code>`| ✅   | Delete a link            |
-| GET    | `/api/all`      | ✅   | List all your links      |
-| GET    | `/login`        | ❌   | Login page               |
-| GET    | `/register`     | ❌   | Register page            |
-| GET    | `/logout`       | ❌   | Logout                   |
+> Screenshots will be added soon.
 
-## Resume Bullet Point
-> Built a full-stack URL shortener with user authentication (bcrypt), session management, SQLite persistence, per-user analytics dashboard, and REST API — deployed on Render.
+Example:
+
+```markdown
+![Home](screenshots/home.png)
+
+![Dashboard](screenshots/dashboard.png)
+```
+
+---
+
+## 🔮 Future Improvements
+
+* QR code generation
+* Custom short URLs
+* Link expiration dates
+* Password-protected links
+* Search and filter functionality
+* Dark mode
+* PostgreSQL support
+* Docker support
+
+---
+
+## 💡 Skills Demonstrated
+
+* Full-Stack Web Development
+* Authentication & Authorization
+* Database Design
+* CRUD Operations
+* Session Management
+* RESTful Application Development
+* Cloud Deployment
+* Git & GitHub Workflow
+
+---
+
+## 👩‍💻 Author
+
+**Tamanna**
+
+GitHub: https://github.com/Tam-builds
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
