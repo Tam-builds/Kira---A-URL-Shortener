@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kira ✦ Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:        #F3F0FF;
+      --bg2:       #EDE9FE;
+      --surface:   #FFFFFF;
+      --surface2:  #F9F7FF;
+      --border:    #E0D9FF;
+      --border2:   #C4B5FD;
+      --accent:    #7C3AED;
+      --accent2:   #A78BFA;
+      --accent3:   #C084FC;
+      --grad:      linear-gradient(135deg,#C084FC 0%,#7C3AED 60%,#4F46E5 100%);
+      --grad2:     linear-gradient(135deg,#F0ABFC,#818CF8);
+      --text:      #1E1047;
+      --text2:     #5B21B6;
+      --text3:     #8B5CF6;
+      --muted:     #9CA3AF;
+      --green:     #059669;
+      --green-bg:  #D1FAE5;
+      --green-b:   #A7F3D0;
+      --red:       #DC2626;
+      --red-bg:    #FEE2E2;
+      --yellow:    #D97706;
+      --yellow-bg: #FEF3C7;
+      --r:         12px;
+      --r-lg:      18px;
+      --shadow:    0 2px 12px rgba(124,58,237,0.08);
+      --shadow-md: 0 4px 24px rgba(124,58,237,0.12);
+      --shadow-lg: 0 8px 40px rgba(124,58,237,0.16);
+    }
+
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--bg);
+      background-image:
+        radial-gradient(ellipse at 0% 0%,rgba(192,132,252,0.2) 0%,transparent 50%),
+        radial-gradient(ellipse at 100% 100%,rgba(129,140,248,0.15) 0%,transparent 50%);
+      color:var(--text);
+      font-family:'Nunito',system-ui,sans-serif;
+      min-height:100vh;
+      padding-bottom:80px;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar{
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:blur(12px);
+      border-bottom:1.5px solid var(--border);
+      position:sticky;top:0;z-index:100;
+    }
+    .topbar-inner{
+      max-width:900px;margin:0 auto;padding:0 20px;
+      display:flex;align-items:center;justify-content:space-between;height:60px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;
+           letter-spacing:-0.03em;color:var(--text);text-decoration:none;}
+    .brand-icon{width:34px;height:34px;background:var(--grad);border-radius:10px;
+                display:flex;align-items:center;justify-content:center;
+                box-shadow:0 3px 10px rgba(124,58,237,0.35);}
+    .brand-icon svg{width:18px;height:18px;fill:white;}
+    .brand-name{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+    .topbar-right{display:flex;align-items:center;gap:12px;}
+    .user-pill{display:flex;align-items:center;gap:8px;background:var(--bg2);
+               border:1.5px solid var(--border2);border-radius:20px;
+               padding:5px 12px 5px 6px;font-size:12px;font-weight:700;color:var(--text2);}
+    .user-avatar{width:24px;height:24px;border-radius:50%;background:var(--grad);
+                 display:flex;align-items:center;justify-content:center;
+                 font-size:11px;font-weight:800;color:white;}
+    .logout-btn{font-size:12px;font-weight:700;color:var(--text3);text-decoration:none;
+                padding:6px 12px;border-radius:8px;border:1.5px solid var(--border2);
+                background:white;transition:background 0.15s,color 0.15s;}
+    .logout-btn:hover{background:var(--bg2);color:var(--accent);}
+
+    /* ── HERO ── */
+    .hero{max-width:900px;margin:0 auto;padding:48px 20px 0;text-align:center;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;
+             font-size:12px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;
+             color:var(--accent);background:var(--bg2);border:1.5px solid var(--border2);
+             padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+    h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;letter-spacing:-0.04em;
+       line-height:1.08;margin-bottom:14px;color:var(--text);}
+    .grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .tagline{font-size:15px;color:var(--muted);margin-bottom:40px;
+             font-weight:600;line-height:1.6;}
+
+    /* ── INPUT CARD ── */
+    .input-wrap{max-width:680px;margin:0 auto;}
+    .input-card{
+      background:var(--surface);
+      border:2px solid var(--border2);
+      border-radius:var(--r-lg);
+      padding:6px 6px 6px 18px;
+      display:flex;align-items:center;gap:10px;
+      box-shadow:var(--shadow-lg);
+      transition:border-color 0.2s,box-shadow 0.2s;
+    }
+    .input-card:focus-within{
+      border-color:var(--accent);
+      box-shadow:0 0 0 4px rgba(124,58,237,0.15),var(--shadow-lg);
+    }
+    .url-icon{color:var(--accent2);flex-shrink:0;}
+    #url-input{flex:1;background:transparent;border:none;outline:none;
+               color:var(--text);font-size:15px;font-weight:600;
+               font-family:'Nunito',sans-serif;padding:13px 0;}
+    #url-input::placeholder{color:var(--muted);font-weight:500;}
+    .snip-btn{
+      background:var(--grad);color:white;border:none;border-radius:12px;
+      padding:13px 22px;font-size:14px;font-weight:800;
+      font-family:'Nunito',sans-serif;cursor:pointer;
+      display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;
+      box-shadow:0 4px 14px rgba(124,58,237,0.35);
+      transition:opacity 0.15s,transform 0.1s,box-shadow 0.15s;
+    }
+    .snip-btn:hover{opacity:0.9;box-shadow:0 6px 20px rgba(124,58,237,0.45);}
+    .snip-btn:active{transform:scale(0.97);}
+    .snip-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+    /* ── ERROR ── */
+    .err-box{max-width:680px;margin:10px auto 0;background:var(--red-bg);
+             border:1.5px solid #FECACA;border-radius:var(--r);
+             padding:12px 16px;font-size:13px;font-weight:700;color:var(--red);
+             display:none;align-items:center;gap:8px;}
+
+    /* ── RESULT ── */
+    #result-section{max-width:680px;margin:12px auto 0;display:none;animation:slideUp 0.25s ease;}
+    @keyframes slideUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    .result-card{background:var(--surface);border:2px solid var(--green-b);
+                 border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow-md);}
+    .result-top{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+    .result-badge{background:var(--green-bg);color:var(--green);font-size:11px;
+                  font-weight:800;padding:4px 10px;border-radius:20px;
+                  border:1.5px solid var(--green-b);white-space:nowrap;}
+    .result-link{font-size:17px;font-weight:800;color:var(--accent);
+                 font-family:'JetBrains Mono',monospace;word-break:break-all;
+                 text-decoration:none;flex:1;}
+    .result-link:hover{text-decoration:underline;}
+    .result-actions{display:flex;gap:8px;flex-wrap:wrap;}
+    .act-btn{display:flex;align-items:center;gap:6px;background:var(--bg2);
+             border:1.5px solid var(--border2);color:var(--text2);border-radius:9px;
+             padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;
+             font-family:'Nunito',sans-serif;
+             transition:background 0.15s,border-color 0.15s,color 0.15s;}
+    .act-btn:hover{background:var(--bg);border-color:var(--accent2);color:var(--accent);}
+    .act-btn.copied{background:var(--green-bg);color:var(--green);border-color:var(--green-b);}
+    .result-meta{margin-top:14px;padding-top:14px;border-top:1.5px solid var(--border);
+                 display:flex;gap:20px;flex-wrap:wrap;}
+    .meta-item{font-size:12px;color:var(--muted);font-weight:600;}
+    .meta-item span{color:var(--text2);font-weight:800;}
+
+    /* ── DASHBOARD ── */
+    .dashboard{max-width:900px;margin:52px auto 0;padding:0 20px;}
+    .dash-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;}
+    .dash-title{font-size:18px;font-weight:800;letter-spacing:-0.02em;}
+    .dash-sub{font-size:12px;color:var(--muted);margin-top:2px;font-weight:600;}
+    .refresh-btn{display:flex;align-items:center;gap:6px;background:var(--surface);
+                 border:1.5px solid var(--border2);color:var(--text3);border-radius:9px;
+                 padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;
+                 font-family:'Nunito',sans-serif;transition:background 0.15s;}
+    .refresh-btn:hover{background:var(--bg2);}
+
+    /* ── STAT CARDS ── */
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+    .stat-card{background:var(--surface);border:1.5px solid var(--border);
+               border-radius:var(--r);padding:20px;box-shadow:var(--shadow);
+               position:relative;overflow:hidden;}
+    .stat-card::before{content:'';position:absolute;top:-20px;right:-20px;
+                       width:80px;height:80px;border-radius:50%;opacity:0.08;}
+    .stat-card:nth-child(1)::before{background:#7C3AED;}
+    .stat-card:nth-child(2)::before{background:#059669;}
+    .stat-card:nth-child(3)::before{background:#D97706;}
+    .stat-label{font-size:11px;font-weight:800;text-transform:uppercase;
+                letter-spacing:0.1em;color:var(--muted);margin-bottom:10px;
+                display:flex;align-items:center;gap:6px;}
+    .stat-icon{width:18px;height:18px;border-radius:6px;display:flex;align-items:center;
+               justify-content:center;flex-shrink:0;}
+    .stat-icon.purple{background:rgba(124,58,237,0.12);}
+    .stat-icon.green{background:rgba(5,150,105,0.12);}
+    .stat-icon.yellow{background:rgba(217,119,6,0.12);}
+    .stat-value{font-size:32px;font-weight:900;letter-spacing:-0.04em;line-height:1;}
+    .stat-value.purple{color:var(--accent);}
+    .stat-value.green{color:var(--green);}
+    .stat-value.yellow{color:var(--yellow);}
+
+    /* ── LINKS TABLE ── */
+    .links-card{background:var(--surface);border:1.5px solid var(--border);
+                border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
+    .links-head{display:grid;grid-template-columns:110px 1fr 90px 120px 52px;
+                gap:14px;padding:12px 20px;
+                border-bottom:1.5px solid var(--border);
+                font-size:11px;font-weight:800;text-transform:uppercase;
+                letter-spacing:0.09em;color:var(--muted);background:var(--surface2);}
+    .link-row{display:grid;grid-template-columns:110px 1fr 90px 120px 52px;
+              gap:14px;padding:15px 20px;
+              border-bottom:1.5px solid var(--border);align-items:center;
+              transition:background 0.12s;}
+    .link-row:last-child{border-bottom:none;}
+    .link-row:hover{background:var(--surface2);}
+    .short-code{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                color:var(--accent);text-decoration:none;
+                display:flex;align-items:center;gap:5px;}
+    .short-code:hover{text-decoration:underline;}
+    .ext-icon{opacity:0;transition:opacity 0.1s;}
+    .link-row:hover .ext-icon{opacity:1;}
+    .orig-url{font-size:13px;color:var(--text2);font-weight:600;
+              overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .favicon{width:14px;height:14px;border-radius:2px;vertical-align:-2px;margin-right:5px;}
+    .click-cell{display:flex;align-items:center;gap:8px;}
+    .click-num{font-size:13px;font-weight:800;color:var(--text);min-width:20px;text-align:right;}
+    .bar-wrap{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+    .bar-fill{height:100%;background:var(--grad);border-radius:3px;transition:width 0.6s ease;}
+    .date-cell{font-size:11px;color:var(--muted);font-weight:600;
+               font-family:'JetBrains Mono',monospace;}
+    .del-btn{background:none;border:none;cursor:pointer;color:var(--muted);
+             padding:5px;border-radius:6px;transition:background 0.12s,color 0.12s;
+             display:flex;align-items:center;justify-content:center;}
+    .del-btn:hover{background:var(--red-bg);color:var(--red);}
+
+    .empty-state{padding:52px 20px;text-align:center;}
+    .empty-icon{font-size:40px;margin-bottom:12px;}
+    .empty-state p{color:var(--muted);font-size:14px;font-weight:600;}
+
+    /* ── STATS LOOKUP ── */
+    .lookup-card{background:var(--surface);border:1.5px solid var(--border);
+                 border-radius:var(--r-lg);padding:24px;margin-top:20px;
+                 box-shadow:var(--shadow);}
+    .lookup-title{font-size:14px;font-weight:800;margin-bottom:14px;color:var(--text2);}
+    .lookup-row{display:flex;gap:8px;}
+    .lookup-input{flex:1;background:var(--bg2);border:1.5px solid var(--border);
+                  border-radius:9px;color:var(--text);font-size:14px;font-weight:700;
+                  font-family:'JetBrains Mono',monospace;padding:10px 14px;outline:none;
+                  transition:border-color 0.2s;}
+    .lookup-input:focus{border-color:var(--accent2);}
+    .lookup-input::placeholder{font-family:'Nunito',sans-serif;font-weight:500;color:var(--muted);}
+    .lookup-go{background:var(--bg2);border:1.5px solid var(--border2);color:var(--text2);
+               border-radius:9px;padding:10px 18px;font-size:13px;font-weight:800;
+               cursor:pointer;font-family:'Nunito',sans-serif;
+               transition:background 0.15s,color 0.15s;}
+    .lookup-go:hover{background:var(--bg);color:var(--accent);}
+    #lookup-result{margin-top:16px;display:none;animation:slideUp 0.2s ease;}
+    .lookup-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
+    .lc{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:13px 14px;}
+    .lc-label{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;
+              letter-spacing:0.08em;margin-bottom:5px;}
+    .lc-val{font-size:20px;font-weight:900;color:var(--accent);}
+    .lookup-orig{font-size:12px;font-weight:700;color:var(--text2);background:var(--bg2);
+                 border:1.5px solid var(--border);border-radius:10px;
+                 padding:10px 14px;word-break:break-all;font-family:'JetBrains Mono',monospace;}
+
+    /* ── SPINNER ── */
+    .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);
+          border-top-color:white;border-radius:50%;
+          animation:spin 0.5s linear infinite;display:inline-block;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* ── FOOTER ── */
+    footer{max-width:900px;margin:48px auto 0;padding:20px 20px 0;
+           border-top:1.5px solid var(--border);display:flex;
+           align-items:center;justify-content:space-between;
+           font-size:12px;color:var(--muted);font-weight:600;}
+    footer a{color:var(--accent2);text-decoration:none;}
+    footer a:hover{text-decoration:underline;}
+
+    /* ── DECORATIVE STARS ── */
+    .deco{position:fixed;pointer-events:none;z-index:0;
+          font-size:18px;opacity:0.12;animation:float2 8s ease-in-out infinite;}
+    .deco:nth-child(1){top:12%;right:6%;animation-delay:0s;}
+    .deco:nth-child(2){top:60%;left:3%;animation-delay:2s;}
+    .deco:nth-child(3){bottom:20%;right:8%;animation-delay:4s;font-size:13px;}
+    @keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+
+    @media(max-width:620px){
+      .stats-grid{grid-template-columns:1fr 1fr;}
+      .links-head,.link-row{grid-template-columns:90px 1fr 60px 40px;}
+      .links-head .lh-date,.link-row .date-cell{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="deco">✦</div>
+<div class="deco">✧</div>
+<div class="deco">✦</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </div>
+      <span class="brand-name">Kira</span> ✦
+    </a>
+    <div class="topbar-right">
+      <div class="user-pill">
+        <div class="user-avatar">{{ user_email[0].upper() }}</div>
+        {{ user_email }}
+      </div>
+      <a class="logout-btn" href="/logout">Sign out</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">✦ Your link dashboard</div>
+  <h1>Make every link<br><span class="grad-text">sparkle ✦</span></h1>
+  <p class="tagline">Paste any long URL below and get a clean short one instantly.<br>Track every click right here.</p>
+
+  <div class="input-wrap">
+    <div class="input-card">
+      <svg class="url-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/>
+      </svg>
+      <input type="text" id="url-input" placeholder="https://your-very-long-url.com/paste/here" autocomplete="off"/>
+      <button class="snip-btn" id="snip-btn" onclick="shortenURL()">
+        ✦ Kira it!
+      </button>
+    </div>
+
+    <div class="err-box" id="err-box">
+      ⚠ <span id="err-text"></span>
+    </div>
+
+    <div id="result-section">
+      <div class="result-card">
+        <div class="result-top">
+          <span class="result-badge">✦ Link created!</span>
+          <a class="result-link" id="result-link" href="#" target="_blank"></a>
+        </div>
+        <div class="result-actions">
+          <button class="act-btn" id="copy-btn" onclick="copyResult()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy link
+          </button>
+          <button class="act-btn" onclick="openResult()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Open
+          </button>
+        </div>
+        <div class="result-meta">
+          <div class="meta-item">Code: <span id="result-code" style="font-family:'JetBrains Mono',monospace"></span></div>
+          <div class="meta-item">Created: <span id="result-created">just now</span></div>
+          <div class="meta-item">Clicks: <span id="result-clicks">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dashboard">
+  <div class="dash-header">
+    <div>
+      <div class="dash-title">✦ Your Links</div>
+      <div class="dash-sub">All your shortened links and analytics</div>
+    </div>
+    <button class="refresh-btn" onclick="loadAll()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="1 4 1 10 7 10"/>
+        <path d="M3.51 15a9 9 0 1 0 .49-5"/>
+      </svg>
+      Refresh
+    </button>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">
+        <div class="stat-icon purple">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
+        Total Links
+      </div>
+      <div class="stat-value purple" id="stat-total">{{ recent|length }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">
+        <div class="stat-icon green">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        Total Clicks
+      </div>
+      <div class="stat-value green" id="stat-clicks-total">{{ recent|map(attribute='clicks')|sum }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">
+        <div class="stat-icon yellow">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.5">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        Top Link Clicks
+      </div>
+      <div class="stat-value yellow" id="stat-top">{% if recent %}{{ recent|map(attribute='clicks')|max }}{% else %}0{% endif %}</div>
+    </div>
+  </div>
+
+  <!-- LINKS TABLE -->
+  <div class="links-card">
+    <div class="links-head">
+      <div>Short link</div>
+      <div>Original URL</div>
+      <div>Clicks</div>
+      <div class="lh-date">Created</div>
+      <div></div>
+    </div>
+    <div id="links-body">
+      {% if recent %}
+        {% set max_clicks = recent|map(attribute='clicks')|max %}
+        {% for row in recent %}
+        <div class="link-row" id="row-{{ row.short }}">
+          <a class="short-code" href="/{{ row.short }}" target="_blank">
+            /{{ row.short }}
+            <svg class="ext-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+          <div class="orig-url" title="{{ row.original }}">
+            <img class="favicon" src="https://www.google.com/s2/favicons?sz=16&domain={{ row.original }}"
+                 onerror="this.style.display='none'" alt=""/>
+            {{ row.original }}
+          </div>
+          <div class="click-cell">
+            <span class="click-num">{{ row.clicks }}</span>
+            <div class="bar-wrap">
+              <div class="bar-fill" style="width:{% if max_clicks > 0 %}{{ (row.clicks / max_clicks * 100)|round|int }}{% else %}0{% endif %}%"></div>
+            </div>
+          </div>
+          <div class="date-cell">{{ row.created }}</div>
+          <button class="del-btn" onclick="deleteLink('{{ row.short }}')" title="Delete">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            </svg>
+          </button>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">🔗</div>
+          <p>No links yet — paste your first URL above and Kira it! ✦</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- STATS LOOKUP -->
+  <div class="lookup-card">
+    <div class="lookup-title">🔍 Look up any link's stats</div>
+    <div class="lookup-row">
+      <input type="text" class="lookup-input" id="lookup-input" placeholder="Enter short code e.g. aB3xYz"/>
+      <button class="lookup-go" onclick="lookupStats()">Check ✦</button>
+    </div>
+    <div id="lookup-result">
+      <div class="lookup-grid">
+        <div class="lc"><div class="lc-label">Clicks</div><div class="lc-val" id="ls-clicks">—</div></div>
+        <div class="lc"><div class="lc-label">Short code</div>
+          <div class="lc-val" id="ls-code" style="font-family:'JetBrains Mono',monospace;font-size:14px;">—</div>
+        </div>
+        <div class="lc"><div class="lc-label">Created</div>
+          <div class="lc-val" id="ls-date" style="font-size:13px;">—</div>
+        </div>
+      </div>
+      <div class="lookup-orig" id="ls-orig">—</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Kira ✦ Built with Flask + SQLite &nbsp;·&nbsp; <a href="/api/all">JSON API</a></span>
+  <span>Made with 💜</span>
+</footer>
+
+<script>
+  async function shortenURL() {
+    const input = document.getElementById('url-input');
+    const btn   = document.getElementById('snip-btn');
+    const err   = document.getElementById('err-box');
+    const res   = document.getElementById('result-section');
+    const url   = input.value.trim();
+
+    err.style.display = 'none';
+    res.style.display = 'none';
+    if (!url) { showErr('Please paste a URL first ✦'); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Kira-ing…';
+
+    try {
+      const r = await fetch('/shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      const data = await r.json();
+      if (!r.ok) { showErr(data.error || 'Something went wrong!'); return; }
+
+      document.getElementById('result-link').href = data.short_url;
+      document.getElementById('result-link').textContent = data.short_url;
+      document.getElementById('result-code').textContent = data.code;
+      document.getElementById('result-clicks').textContent = '0';
+
+      const cb = document.getElementById('copy-btn');
+      cb.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy link`;
+      cb.classList.remove('copied');
+
+      res.style.display = 'block';
+      setTimeout(loadAll, 300);
+    } catch(e) {
+      showErr('Network error. Is the server running?');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '✦ Kira it!';
+    }
+  }
+
+  function showErr(msg) {
+    document.getElementById('err-text').textContent = msg;
+    document.getElementById('err-box').style.display = 'flex';
+  }
+
+  function copyResult() {
+    const url = document.getElementById('result-link').textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied! ✦`;
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy link`;
+        btn.classList.remove('copied');
+      }, 2500);
+    });
+  }
+
+  function openResult() {
+    window.open(document.getElementById('result-link').href, '_blank');
+  }
+
+  async function loadAll() {
+    const r = await fetch('/api/all');
+    const data = await r.json();
+    const maxClicks = Math.max(...data.map(d => d.clicks), 1);
+
+    document.getElementById('stat-total').textContent = data.length;
+    document.getElementById('stat-clicks-total').textContent = data.reduce((a,b)=>a+b.clicks,0);
+    document.getElementById('stat-top').textContent = data.reduce((a,b)=>Math.max(a,b.clicks),0);
+
+    const body = document.getElementById('links-body');
+    if (!data.length) {
+      body.innerHTML = `<div class="empty-state"><div class="empty-icon">🔗</div><p>No links yet — paste your first URL above and Kira it! ✦</p></div>`;
+      return;
+    }
+    body.innerHTML = data.map(row => `
+      <div class="link-row" id="row-${row.short}">
+        <a class="short-code" href="/${row.short}" target="_blank">
+          /${row.short}
+          <svg class="ext-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+        <div class="orig-url" title="${row.original}">
+          <img class="favicon" src="https://www.google.com/s2/favicons?sz=16&domain=${row.original}" onerror="this.style.display='none'" alt=""/>
+          ${row.original}
+        </div>
+        <div class="click-cell">
+          <span class="click-num">${row.clicks}</span>
+          <div class="bar-wrap">
+            <div class="bar-fill" style="width:${Math.round(row.clicks/maxClicks*100)}%"></div>
+          </div>
+        </div>
+        <div class="date-cell">${row.created}</div>
+        <button class="del-btn" onclick="deleteLink('${row.short}')" title="Delete">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6M14 11v6"/>
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+          </svg>
+        </button>
+      </div>
+    `).join('');
+  }
+
+  async function deleteLink(code) {
+    if (!confirm(`Delete /${code}?`)) return;
+    const r = await fetch(`/delete/${code}`, { method: 'POST' });
+    if (r.ok) {
+      document.getElementById(`row-${code}`)?.remove();
+      loadAll();
+    }
+  }
+
+  async function lookupStats() {
+    const code = document.getElementById('lookup-input').value.trim();
+    if (!code) return;
+    const r = await fetch(`/stats/${code}`);
+    const data = await r.json();
+    if (!r.ok) { alert('Link not found.'); return; }
+    document.getElementById('ls-clicks').textContent = data.clicks;
+    document.getElementById('ls-code').textContent = '/' + data.short;
+    document.getElementById('ls-date').textContent = data.created;
+    document.getElementById('ls-orig').textContent = data.original;
+    document.getElementById('lookup-result').style.display = 'block';
+  }
+
+  document.getElementById('url-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') shortenURL();
+  });
+  document.getElementById('lookup-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') lookupStats();
+  });
+</script>
+</body>
+</html>

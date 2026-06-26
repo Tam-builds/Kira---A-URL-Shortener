@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kira ✦ Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:        #F0EEFF;
+      --bg2:       #E9E3FF;
+      --surface:   #FFFFFF;
+      --border:    #DDD6FE;
+      --border2:   #C4B5FD;
+      --accent:    #7C3AED;
+      --accent2:   #A78BFA;
+      --grad:      linear-gradient(135deg,#C084FC,#818CF8);
+      --text:      #2D1B69;
+      --text2:     #6B7280;
+      --text3:     #9CA3AF;
+      --red:       #FEE2E2;
+      --red-b:     #FECACA;
+      --red-t:     #DC2626;
+      --green:     #D1FAE5;
+      --green-t:   #059669;
+      --r:         12px;
+      --r-lg:      18px;
+      --shadow:    0 4px 24px rgba(124,58,237,0.10);
+      --shadow-lg: 0 8px 40px rgba(124,58,237,0.15);
+    }
+    body{
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(192,132,252,0.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(129,140,248,0.15) 0%, transparent 50%);
+      color:var(--text);
+      font-family:'Nunito',system-ui,sans-serif;
+      min-height:100vh;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:24px 16px;
+    }
+
+    /* floating stars decoration */
+    .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .star{position:absolute;width:6px;height:6px;border-radius:50%;
+          background:var(--accent2);opacity:0.25;animation:float 6s ease-in-out infinite;}
+    .star:nth-child(1){top:10%;left:15%;animation-delay:0s;width:8px;height:8px;}
+    .star:nth-child(2){top:25%;left:80%;animation-delay:1s;width:5px;height:5px;}
+    .star:nth-child(3){top:60%;left:10%;animation-delay:2s;width:7px;height:7px;}
+    .star:nth-child(4){top:75%;left:85%;animation-delay:0.5s;width:5px;height:5px;}
+    .star:nth-child(5){top:45%;left:90%;animation-delay:1.5s;width:6px;height:6px;}
+    .star:nth-child(6){top:85%;left:30%;animation-delay:3s;width:4px;height:4px;}
+    @keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-12px) scale(1.2);}}
+
+    .wrap{position:relative;z-index:1;width:100%;max-width:400px;}
+
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;
+           letter-spacing:-0.03em;color:var(--text);margin-bottom:28px;justify-content:center;}
+    .brand-icon{width:40px;height:40px;background:var(--grad);border-radius:12px;
+                display:flex;align-items:center;justify-content:center;
+                box-shadow:0 4px 12px rgba(124,58,237,0.3);}
+    .brand-icon svg{width:20px;height:20px;fill:white;}
+    .brand-name{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .brand-sparkle{font-size:14px;-webkit-text-fill-color:var(--accent2);}
+
+    .card{background:var(--surface);border:1.5px solid var(--border);
+          border-radius:var(--r-lg);padding:36px 32px;
+          box-shadow:var(--shadow-lg);}
+
+    .card-title{font-size:22px;font-weight:800;letter-spacing:-0.02em;
+                color:var(--text);margin-bottom:4px;}
+    .card-sub{font-size:13px;color:var(--text2);margin-bottom:28px;}
+
+    .field{margin-bottom:16px;}
+    .field label{display:block;font-size:12px;font-weight:700;color:var(--text);
+                 text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px;}
+    .field input{width:100%;background:var(--bg);border:1.5px solid var(--border);
+                 border-radius:10px;color:var(--text);font-size:14px;font-weight:600;
+                 font-family:'Nunito',sans-serif;padding:12px 14px;outline:none;
+                 transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;}
+    .field input:focus{border-color:var(--accent2);background:white;
+                       box-shadow:0 0 0 3px rgba(167,139,250,0.25);}
+    .field input::placeholder{color:var(--text3);font-weight:500;}
+
+    .btn-primary{width:100%;background:var(--grad);color:white;border:none;
+                 border-radius:11px;padding:13px;font-size:15px;font-weight:800;
+                 font-family:'Nunito',sans-serif;cursor:pointer;margin-top:6px;
+                 box-shadow:0 4px 16px rgba(124,58,237,0.3);
+                 transition:opacity 0.15s,transform 0.1s,box-shadow 0.15s;}
+    .btn-primary:hover{opacity:0.92;box-shadow:0 6px 20px rgba(124,58,237,0.4);}
+    .btn-primary:active{transform:scale(0.98);}
+
+    .flash{background:var(--red);border:1.5px solid var(--red-b);
+           border-radius:10px;padding:11px 14px;font-size:13px;font-weight:600;
+           color:var(--red-t);margin-bottom:18px;display:flex;gap:8px;align-items:flex-start;}
+
+    .divider{display:flex;align-items:center;gap:12px;margin:22px 0;
+             color:var(--text3);font-size:12px;font-weight:600;}
+    .divider::before,.divider::after{content:'';flex:1;height:1.5px;background:var(--border);}
+
+    .switch{text-align:center;margin-top:22px;font-size:13px;color:var(--text2);font-weight:600;}
+    .switch a{color:var(--accent);text-decoration:none;font-weight:800;}
+    .switch a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+<div class="stars">
+  <div class="star"></div><div class="star"></div><div class="star"></div>
+  <div class="star"></div><div class="star"></div><div class="star"></div>
+</div>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    </div>
+    <span class="brand-name">Kira</span>
+    <span class="brand-sparkle">✦</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Welcome back! 👋</div>
+    <div class="card-sub">Sign in to manage your sparkly links</div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+      <div class="flash">⚠ {{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required autofocus/>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="••••••••" required/>
+      </div>
+      <button class="btn-primary" type="submit">✦ Sign in</button>
+    </form>
+
+    <div class="switch">
+      New here? <a href="/register">Create an account ✦</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kira ✦ Create Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#F0EEFF;--bg2:#E9E3FF;--surface:#FFFFFF;
+      --border:#DDD6FE;--border2:#C4B5FD;
+      --accent:#7C3AED;--accent2:#A78BFA;
+      --grad:linear-gradient(135deg,#C084FC,#818CF8);
+      --text:#2D1B69;--text2:#6B7280;--text3:#9CA3AF;
+      --red:#FEE2E2;--red-b:#FECACA;--red-t:#DC2626;
+      --r:12px;--r-lg:18px;
+      --shadow-lg:0 8px 40px rgba(124,58,237,0.15);
+    }
+    body{background:var(--bg);background-image:
+      radial-gradient(circle at 20% 20%,rgba(192,132,252,0.18) 0%,transparent 50%),
+      radial-gradient(circle at 80% 80%,rgba(129,140,248,0.15) 0%,transparent 50%);
+      color:var(--text);font-family:'Nunito',system-ui,sans-serif;
+      min-height:100vh;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;padding:24px 16px;}
+    .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .star{position:absolute;width:6px;height:6px;border-radius:50%;
+          background:var(--accent2);opacity:0.25;animation:float 6s ease-in-out infinite;}
+    .star:nth-child(1){top:10%;left:15%;animation-delay:0s;width:8px;height:8px;}
+    .star:nth-child(2){top:25%;left:80%;animation-delay:1s;}
+    .star:nth-child(3){top:60%;left:10%;animation-delay:2s;width:7px;height:7px;}
+    .star:nth-child(4){top:75%;left:85%;animation-delay:0.5s;}
+    .star:nth-child(5){top:85%;left:30%;animation-delay:3s;width:4px;height:4px;}
+    @keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-12px) scale(1.2);}}
+    .wrap{position:relative;z-index:1;width:100%;max-width:400px;}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;
+           letter-spacing:-0.03em;color:var(--text);margin-bottom:28px;justify-content:center;}
+    .brand-icon{width:40px;height:40px;background:var(--grad);border-radius:12px;
+                display:flex;align-items:center;justify-content:center;
+                box-shadow:0 4px 12px rgba(124,58,237,0.3);}
+    .brand-icon svg{width:20px;height:20px;fill:white;}
+    .brand-name{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .card{background:var(--surface);border:1.5px solid var(--border);
+          border-radius:var(--r-lg);padding:36px 32px;box-shadow:var(--shadow-lg);}
+    .card-title{font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;}
+    .card-sub{font-size:13px;color:var(--text2);margin-bottom:28px;}
+    .field{margin-bottom:16px;}
+    .field label{display:block;font-size:12px;font-weight:700;color:var(--text);
+                 text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px;}
+    .field input{width:100%;background:var(--bg);border:1.5px solid var(--border);
+                 border-radius:10px;color:var(--text);font-size:14px;font-weight:600;
+                 font-family:'Nunito',sans-serif;padding:12px 14px;outline:none;
+                 transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;}
+    .field input:focus{border-color:var(--accent2);background:white;
+                       box-shadow:0 0 0 3px rgba(167,139,250,0.25);}
+    .field input::placeholder{color:var(--text3);font-weight:500;}
+    .hint{font-size:11px;color:var(--text3);margin-top:5px;font-weight:600;}
+    .strength{height:4px;border-radius:2px;margin-top:8px;background:var(--border);overflow:hidden;}
+    .strength-bar{height:100%;border-radius:2px;width:0;transition:width 0.3s,background 0.3s;}
+    .btn-primary{width:100%;background:var(--grad);color:white;border:none;
+                 border-radius:11px;padding:13px;font-size:15px;font-weight:800;
+                 font-family:'Nunito',sans-serif;cursor:pointer;margin-top:6px;
+                 box-shadow:0 4px 16px rgba(124,58,237,0.3);
+                 transition:opacity 0.15s,transform 0.1s;}
+    .btn-primary:hover{opacity:0.92;}
+    .btn-primary:active{transform:scale(0.98);}
+    .flash{background:var(--red);border:1.5px solid var(--red-b);border-radius:10px;
+           padding:11px 14px;font-size:13px;font-weight:600;color:var(--red-t);
+           margin-bottom:18px;}
+    .switch{text-align:center;margin-top:22px;font-size:13px;color:var(--text2);font-weight:600;}
+    .switch a{color:var(--accent);text-decoration:none;font-weight:800;}
+    .switch a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+<div class="stars">
+  <div class="star"></div><div class="star"></div><div class="star"></div>
+  <div class="star"></div><div class="star"></div>
+</div>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    </div>
+    <span class="brand-name">Kira</span> ✦
+  </div>
+  <div class="card">
+    <div class="card-title">Join Kira! 🌸</div>
+    <div class="card-sub">Create your account and start shortening</div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+      <div class="flash">⚠ {{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+    <form method="POST">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required autofocus/>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" id="pw" placeholder="Min. 6 characters" required/>
+        <div class="strength"><div class="strength-bar" id="sbar"></div></div>
+        <div class="hint" id="slbl"></div>
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" name="confirm" placeholder="Repeat password" required/>
+      </div>
+      <button class="btn-primary" type="submit">✦ Create Account</button>
+    </form>
+    <div class="switch">Already have an account? <a href="/login">Sign in ✦</a></div>
+  </div>
+</div>
+<script>
+  const pw=document.getElementById('pw'),bar=document.getElementById('sbar'),lbl=document.getElementById('slbl');
+  pw.addEventListener('input',()=>{
+    const v=pw.value;let s=0;
+    if(v.length>=6)s++;if(v.length>=10)s++;
+    if(/[A-Z]/.test(v)&&/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;
+    const m=[['','#E5E7EB'],['Weak','#EF4444'],['Fair','#EAB308'],['Good','#22C55E'],['Strong','#7C3AED']];
+    bar.style.width=(s*25)+'%';bar.style.background=m[s][1];
+    lbl.textContent=m[s][0];lbl.style.color=m[s][1];
+  });
+</script>
+</body>
+</html>
