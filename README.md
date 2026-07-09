@@ -10,7 +10,9 @@ A secure and modern URL Shortener web application built with **Flask**, **SQLite
 
 ## 🎬 Demo
 
-> Add your GitHub video link here after uploading `docs/demo.mp4`
+
+https://github.com/user-attachments/assets/397e0416-238b-4081-8c54-89d8d95166f7
+
 
 ---
 
